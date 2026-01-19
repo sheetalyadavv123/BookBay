@@ -1,4 +1,6 @@
 import React from 'react'
+import list from '../../public/list.json';
+import Cards from '../components/Cards';
 
 function course() {
   return (
@@ -11,6 +13,13 @@ function course() {
                Take your time, wander through words, and read whatever feels right to your heart.
                No rules, no rush — just you and the joy of getting lost in a good book.</p>
           <button className="bg-pink-300 text-white px-4 py-2 rounded-md hover:bg-pink-500 duration-300 mt-6">Back</button>
+       </div>
+       <div className="mt-12 grid grid-cols-1 md:grid-cols-4 ">
+        {
+           list.map((item)=>(
+            <Cards key={item.id} item={item}/>
+           ))
+        }
        </div>
     </div>
     </>
