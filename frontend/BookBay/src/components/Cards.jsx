@@ -2,7 +2,7 @@ import React from 'react'
 function Cards({item}) {
   return (
     <div className="px-3 pb-4 h-full"> {/* Padding creates the gap between cards */}
-       <div className="card bg-base-100 shadow-xl border overflow-hidden h-full ">
+       <div className="card bg-base-100 shadow-xl border overflow-hidden h-full hover:scale-105 duration-200 ">
          <figure className="h-56  w-full bg-gray-200 overflow-hidden">
            <img
              src={item.image}
