@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
-function Login() {
+function Signup() {
   return (
+    <>
     <div>
-      <dialog id="my_modal_3" className="modal">
-        <div className="modal-box">
+        <div id="my_modal_3" className="">
+        <div className="">
            <form method="dialog">
       {/* if there is a button in form, it will close the modal */}
            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
@@ -38,9 +39,10 @@ function Login() {
         </div>
 
        </div>
-      </dialog>
+      </div>
     </div>
+    </>
   )
 }
 
-export default Login
+export default Signup
