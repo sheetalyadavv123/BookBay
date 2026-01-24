@@ -1,23 +1,31 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-const app = express();
+import bookRoutes from "./route/book.route.js";
 
 dotenv.config();
-const PORT=process.env.PORT || 4000;
-const URI=process.env.MongoDBURI;
 
-// connect to mongoDB
-try{
-   mongoose.connect(URI,{
-      useNewUrlParser:true,
-      useUnifiedTopology:true
-   })
-   console.log("Connected to mongoDB")
-} catch(error){
-    console.log("Error:",error)
-}
+const app = express();
+
+//required to read JSON body
+app.use(express.json());
+
+const PORT = process.env.PORT || 4001;
+const URI = process.env.MongoDBURI;
+
+// Proper MongoDB connection
+mongoose.connect(URI)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((error) => console.log("MongoDB error:", error));
+
+// Test route
+app.get("/", (req, res) => {
+  res.send("Backend is running");
+});
+
+// Routes
+app.use("/book", bookRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`)
-})
+  console.log(`Server is listening on port ${PORT}`);
+});
