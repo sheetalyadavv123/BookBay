@@ -23,9 +23,13 @@ function Signup() {
          if(res.data){
           alert("Signup successfull")
          }
-       }).catch((err)=>{
-        console.log(err)
-          alert("Error:"+err)
+         localStorage.setItem("Users",res.data);
+       })
+       .catch((err)=>{
+        if(err.response){
+            console.log(err);
+            alert("Error:"+err.response.data.message)
+        }
        })
     }
   return (
