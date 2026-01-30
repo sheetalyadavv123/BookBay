@@ -10,28 +10,34 @@ function Signup() {
       handleSubmit,
       formState: { errors },
     } = useForm()
-    const onSubmit =async (data) => {
-      const userInfo={
-        fullname:data.fullname, 
-        email:data.email,
-        password:data.password,
+    const onSubmit = async (data) => {
+  try {
+    const userInfo = {
+      fullname: data.fullname,
+      email: data.email,
+      password: data.password,
+    };
 
-      }
-      await axios.post("http://localhost:4001/user/signup",userInfo)
-       .then((res)=>{
-         console.log(res.data)
-         if(res.data){
-          alert("Signup successfull")
-         }
-         localStorage.setItem("Users",res.data);
-       })
-       .catch((err)=>{
-        if(err.response){
-            console.log(err);
-            alert("Error:"+err.response.data.message)
-        }
-       })
+    const res = await axios.post(
+      "http://localhost:4001/user/signup",
+      userInfo
+    );
+
+    console.log("Signup response:", res.data);
+
+    if (res.data?.user) {
+      localStorage.setItem(
+        "Users",
+        JSON.stringify(res.data.user)
+      );
+      alert("Signup successful");
     }
+
+  } catch (err) {
+    alert(err.response?.data?.message || "Signup failed");
+  }
+};
+
   return (
     <>
     <div className='flex h-screen items-center justify-center '>
