@@ -1,41 +1,49 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; 
 import Login from "../components/Login"
 import { useForm } from "react-hook-form"
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
 function Signup() {
+  const navigate = useNavigate(); 
+  
   const {
-      register,
-      handleSubmit,
-      formState: { errors },
-    } = useForm()
-    const onSubmit = async (data) => {
-  try {
-    const userInfo = {
-      fullname: data.fullname,
-      email: data.email,
-      password: data.password,
-    };
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
 
-    const res = await axios.post(
-      "http://localhost:4001/user/signup",
-      userInfo
-    );
+  const onSubmit = async (data) => {
+    try {
+      const userInfo = {
+        fullname: data.fullname,
+        email: data.email,
+        password: data.password,
+      };
 
-    console.log("Signup response:", res.data);
+      const res = await axios.post(
+        "http://localhost:4001/user/signup",
+        userInfo
+      );
 
-    if (res.data?.user) {
-      localStorage.setItem("Users",JSON.stringify(res.data.user));
-      toast.success('Signup Successfully');
+      if (res.data?.user) {
+        localStorage.setItem("Users", JSON.stringify(res.data.user));
+        toast.success('Signup Successfully');
+        
+        // Redirect to home page immediately
+        navigate("/"); 
+        setTimeout(() => { navigate("/"); }, 1000);
+      }
+
+    } catch (err) {
+      if (err.response) {
+        toast.error("Error: " + err.response.data.message);
+      } else {
+        toast.error("Signup failed. Server might be down.");
+      }
     }
-
-  } catch (err) {
-    toast.error("Error:"+err.response.data.message);
-  }
-};
-
+  };
   return (
     <>
     <div className='flex h-screen items-center justify-center '>

@@ -26,6 +26,7 @@ function Login() {
       .then((res) => {
         if (res.data) {
           toast.success('Logged in Successfully');
+          setTimeout(()=>{},3000);
           
           document.getElementById("my_modal_3").close();
           
@@ -40,6 +41,7 @@ function Login() {
         if (err.response) {
           console.log(err);
           toast.error("Error: " + err.response.data.message);
+          setTimeout(()=>{},3000);
         }
       })
   }
