@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import {useState} from "react";
 import Login from "../components/Login"
+import {useAuth} from "../context/AuthProvider";
+
 
 function Navbar() {
-
   const [sticky,setSticky]=useState(false)
   useEffect(()=>{
     const handleScroll=()=>{
@@ -12,7 +13,7 @@ function Navbar() {
         }
         else{
           setSticky(false)
-        }
+        } 
     }
     window.addEventListener('scroll',handleScroll)
     return ()=>{

@@ -6,8 +6,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {Routes, Route} from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import {useAuth} from "./context/AuthProvider";
+
 
 function App() {
+  const [authUser,setAuthUser]=useAuth();
+  console.log(authUser);
   const [count, setCount] = useState(0)
 
   return (
@@ -15,7 +19,7 @@ function App() {
     
      <Routes>
       <Route path="/" element={<Home/>}/>
-      <Route path="/course" element={<Courses/>}/>
+      <Route path="/course" element={authUser?<Courses/>:<Navigate to="/signup"/>}/>
       <Route path="/signup" element={<Signup/>}/>
      </Routes>
      <Toaster/>
