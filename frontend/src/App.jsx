@@ -4,7 +4,7 @@ import Courses from './courses/Courses';
 import Signup from './components/Signup'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route, Navigate} from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import {useAuth} from "./context/AuthProvider";
 
